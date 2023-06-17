@@ -17,6 +17,20 @@ extern const int HEIGHT;
 extern bool key_state[ALLEGRO_KEY_MAX];
 extern bool judge_to_game;
 extern bool judge_to_info;
+extern bool render;
+struct Background{
+	float x;
+	float y;
+	float velX;
+	float velY;
+	int dirX;
+	int dirY;
+	int width;
+	int height;
+	ALLEGRO_BITMAP *image;
+};
+extern struct Background FLOOR;
+extern struct Background *bgptr;
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
 #endif

@@ -9,3 +9,5 @@ ALLEGRO_TIMER *fps = NULL;
 bool key_state[ALLEGRO_KEY_MAX] = {false};
 bool judge_to_info = false;
 bool judge_to_game = false;
+bool render = false;
+struct Background FLOOR;

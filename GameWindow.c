@@ -25,7 +25,7 @@ int Game_establish() {
             printf( "Game Over\n" );
     }
     
-    game_destroy();
+    game_scene_destroy();
     return 0;
 }
 void game_init() {
@@ -109,6 +109,9 @@ void game_update(){
             window = 3;
         }
     }
+    if(window == 3){
+        render = true;   
+    }
     
 }
 
@@ -123,14 +126,21 @@ int process_event(){
     }if( window == 2 ){
         start_game_process(event);
     }
+    // if(window == 3 ){
+    //     //game_scene_process(event);
+    // }
 
     // Shutdown our program
-    if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+    if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
         return GAME_TERMINATE;
-    else if(event.type == ALLEGRO_EVENT_TIMER)
-        if(event.timer.source == fps)
-            draw = true;
-
+    }
+        
+    else if(event.type == ALLEGRO_EVENT_TIMER){
+        if(event.timer.source == fps) draw = true;    
+        UpdateBackground(&FLOOR);
+		render = true;
+    }
+       
     if(draw) game_update();
     return 0;
 }
@@ -156,11 +166,10 @@ void game_draw(){
         //printf("show info\n");
         info_draw();
         al_flip_display();
-    }else if( window == 3 ){
+    }else if(render && window == 3 ){
         game_scene_draw();
         al_flip_display();
-        //printf("show game\n");
-        
+        //printf("show game\n");       
     }
     
 }
